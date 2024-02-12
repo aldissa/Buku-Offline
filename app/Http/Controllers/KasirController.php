@@ -11,13 +11,12 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Barryvdh\DomPDF\PDF as DomPDFPDF;
 
 class KasirController extends Controller
 {
     public function home()
     {
-        $buku = Buku::where('status','dijual')->get();
+        $buku = Buku::where('status', 'dijual')->get();
 
         return view('home', compact('buku'));
     }
@@ -33,11 +32,25 @@ class KasirController extends Controller
         return view('kasir.logkasir', compact('log'));
     }
 
+    function filterLog(Request $request)
+    {
+        $start = Carbon::parse($request->input('start'))->startOfDay();
+        $end = Carbon::parse($request->input('end'))->endOfDay();
+
+        if (auth()->user()->role == 'owner') {
+            $log = Log::whereBetween('created_at', [$start, $end])->get();
+        } else {
+            $log = Log::where('user_id', auth()->id())->whereBetween('created_at', [$start, $end])->get();
+        }
+
+        return view('kasir.logkasir', compact('log'));
+    }
+
     public function postkeranjang(Request $request, $id)
     {
         $buku = Buku::find($id);
-        if($request->qty > $buku->stok){
-            return redirect()->back()->with('err' ,'Stok tidak mencukupi');
+        if ($request->qty > $buku->stok) {
+            return redirect()->back()->with('err', 'Stok tidak mencukupi');
         }
         $cekTranksaksi = Transaksi::where(['user_id' => auth()->id(), 'status' => 'pending'])->with('detailtransaksi')->first();
         if ($cekTranksaksi) {
@@ -142,7 +155,8 @@ class KasirController extends Controller
         return view('kasir.history', compact('transaksi'));
     }
 
-    function detailHistory($id) {
+    function detailHistory($id)
+    {
         $transaksi = Transaksi::where('id', $id)->with('detailtransaksi.buku')->first();
         return view('kasir.detailHistory', compact('transaksi'));
     }

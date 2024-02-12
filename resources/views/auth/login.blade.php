@@ -9,32 +9,26 @@
     <title>Login</title>
 </head>
 
-<body>
+<body style="background-image: url('img/prps.jpg')">
     <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class="col-md-6" >
-                <div class="card" style="height: 500px;">
-                    <div class="row g-2 h-100">
-                        <div class="col-md-6 h-100">
-                            <img src="{{ asset('img/library2.jpg') }}" class="img-fluid h-100">
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card-body">
-                                @if (Session::has('err'))
-                                    <span class="alert alert-danger">
-                                        {{ Session::get('err') }}
-                                    </span>
-                                @endif
-                                    <form action="{{ route('postlogin') }}" method="POST">
-                                        @csrf
-                                        <label for="" class="form-label">Username</label>
-                                        <input type="text" class="form-control" name="username" required>
-                                        <label for="" class="form-label">Password</label>
-                                        <input type="password" class="form-control" name="password" required>
-                                        <button class="btn btn-primary mt-3 w-100">Login</button>
-                                    </form>
-                            </div>
-                        </div>
+            <div class="col-md-6">
+                @if (Session::has('err'))
+                    <span class="alert alert-danger w-50">
+                        {{ Session::get('err') }}
+                    </span>
+                @endif
+                <div class="card mt-5" style="background-color: #2D3748">
+                    <div class="card-body">
+                        <h2 class="text-center" style="color: #F4F1DE">LOGIN</h2>
+                        <form action="{{ route('postlogin') }}" method="POST">
+                            @csrf
+                            <label for="" class="form-label" style="color: #F4F1DE">Username</label>
+                            <input type="text" class="form-control" name="username" required>
+                            <label for="" class="form-label" style="color: #F4F1DE">Password</label>
+                            <input type="password" class="form-control" name="password" required>
+                            <button class="btn btn-primary mt-3 w-100">Login</button>
+                        </form>
                     </div>
                 </div>
             </div>

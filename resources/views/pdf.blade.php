@@ -7,6 +7,10 @@
     <title>Document</title>
 </head>
 <style>
+
+    body{
+        font-family: Arial, Helvetica, sans-serif
+    }
     .invoice {
         max-width: 800px;
         margin: 20px auto;
@@ -93,6 +97,8 @@
         @endphp
         <div class="invoice-total">
             <p><strong>Total: {{ number_format($totalSemua, 2,',','.') }}</strong></p>
+            <p><strong>Bayar: {{ number_format($data->uang_bayar, 2,',','.') }}</strong></p>
+            <p><strong>Kembali: {{ number_format($data->uang_kembali, 2,',','.') }}</strong></p>
         </div>
     </div>
 </body>

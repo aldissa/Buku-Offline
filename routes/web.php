@@ -31,12 +31,19 @@ Route::middleware('auth')->group(function() {
         Route::get('/history', [KasirController::class, 'history'])->name('history');
         Route::get('/detail-history/{id}', [KasirController::class, 'detailHistory'])->name('detailHistory');
         Route::get('/log', [KasirController::class, 'log'])->name('log');
+        Route::get('/filterLog', [KasirController::class, 'filterLog'])->name('filterLog');
     });
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/delete/{user}', [AdminController::class, 'delete'])->name('delete');
 
     Route::prefix('admin')->group(function() {
         Route::get('/home', [AdminController::class, 'index'])->name('index');
+        Route::get('/home-user', [AdminController::class, 'user'])->name('user');
         Route::get('/home-filter', [AdminController::class, 'bukuTidakDijual'])->name('filteradmin');
+        Route::get('/tambah-user', [AdminController::class, 'tambahUser'])->name('tambahUser');
+        Route::post('/post-tambah-user', [AdminController::class, 'postUser'])->name('postUser');
+        Route::get('/edit-user/{user}', [AdminController::class, 'editUser'])->name('editUser');
+        Route::post('/post-edit-user/{user}', [AdminController::class, 'postEditUser'])->name('postEditUser');
         Route::get('/tambah', [AdminController::class, 'tambah'])->name('tambah');
         Route::post('/posttambah', [AdminController::class, 'posttambah'])->name('posttambah');
         Route::get('/edit/{buku}', [AdminController::class, 'edit'])->name('edit');

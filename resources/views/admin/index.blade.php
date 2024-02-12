@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('data/cdn.datatables.net_1.13.6_css_jquery.dataTables.min.css') }}">
     <title>Document</title>
 </head>
 
@@ -22,7 +23,7 @@
                 </select>
             </form>
         </div>
-        <table class="table table-bordered">
+        <table class="table table-bordered" id="example">
             <thead>
                 <tr>
                     <th>No</th>
@@ -60,6 +61,10 @@
             </tbody>
         </table>
     </div>
+
+    <script src="{{ asset('table/code.jquery.com_jquery-3.7.0.js') }}"></script>
+    <script src="{{ asset('table/cdn.datatables.net_1.13.6_js_dataTables.bootstrap4.min.js') }}"></script>
+    <script>new DataTable('#example');</script>
 </body>
 
 </html>

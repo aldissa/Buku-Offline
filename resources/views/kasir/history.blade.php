@@ -43,7 +43,7 @@
                                     <div class="d-flex justify-content-between">
                                         <p style="font-size: large">{{ $item->nama_user }} <span
                                                 style="font-weight: 500">({{ $item->created_at }})</span></p>
-                                        <p style="padding: 7px; border-radius: 2px; background-color: darkseagreen;">
+                                        <p style="padding: 7px; border-radius: 2px;" class="bg-warning">
                                             {{ $item->invoice }}</p>
                                     </div>
                                     <div class="d-flex justify-content-between">

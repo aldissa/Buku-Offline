@@ -12,7 +12,7 @@
 
     <div class="container mt-5">
         <div class="mt-3">
-            <h4>Total Pendapatan {{ number_format($totalPendapatan, 2, ',','.') }}</h4>
+            <h4>Total Pendapatan Rp.{{ number_format($totalPendapatan, 2, ',','.') }}</h4>
         </div>
         <div class="row">
             <div class="col-8">

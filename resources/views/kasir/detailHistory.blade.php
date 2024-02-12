@@ -15,7 +15,7 @@
                 <div class="d-flex justify-content-between">
                     <h2>Detail Pembelian</h2>
                     <a href="{{ route('pdf', $transaksi->id) }}">
-                        Print
+                        Print palih die
                     </a>
                 </div>
                 <div class="d-flex justify-content-between mt-2">

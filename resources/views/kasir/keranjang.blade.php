@@ -38,7 +38,7 @@
                                 <span style="font-weight: 500; margin-right: 10px;">Rp.
                                     {{ number_format($totalSemua, 2, ',', '.') }}</span>
                             </p>
-                            <button class="btn btn-primary" disabled id="btnCheckout" style="background-color: #8F4D4D">Bayar</button>
+                            <button class="btn btn-primary" disabled id="btnCheckout">Bayar</button>
                         </div>
                     </div>
                     <div class="mt-3 d-flex justify-content-between">
