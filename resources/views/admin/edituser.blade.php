@@ -25,7 +25,6 @@
                         <input type="text" class="form-control" name="password" required>
                         <label for="" class="form-label">Role</label>
                         <select name="role" id="" class="form-control" required value="{{ $user->name }}">
-                            <option value="admin">Admin</option>
                             <option value="kasir">Kasir</option>
                             <option value="owner">Owner</option>
                         </select>

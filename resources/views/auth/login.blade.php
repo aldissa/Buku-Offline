@@ -9,7 +9,7 @@
     <title>Login</title>
 </head>
 
-<body style="background-image: url('img/prps.jpg')">
+<body style="background-image: url('/img/bg.jpg')">
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6">

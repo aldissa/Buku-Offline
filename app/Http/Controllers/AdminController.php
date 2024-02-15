@@ -33,7 +33,7 @@ class AdminController extends Controller
         $user = User::create([
             'name' => $request->name,
             'username' => $request->username,
-            'password' => $request->password,
+            'password' => bcrypt($request->password),
             'role' => $request->role,
         ]);
 
@@ -55,7 +55,7 @@ class AdminController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'username' => 'required',
+            'username' => 'required|unique',
             'password' => 'required',
             'role' => 'required'
         ]);

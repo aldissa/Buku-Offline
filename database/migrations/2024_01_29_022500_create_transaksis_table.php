@@ -22,6 +22,7 @@ class CreateTransaksisTable extends Migration
             $table->integer('totalharga')->nullable();
             $table->integer('uang_bayar')->nullable();
             $table->integer('uang_kembali')->nullable();
+            $table->foreignId('voucher_id')->nullable()->constrained()->default(NULL);
             $table->timestamps();
         });
     }

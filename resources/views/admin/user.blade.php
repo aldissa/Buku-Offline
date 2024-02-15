@@ -14,7 +14,7 @@
     @include('template.nav')
     <div class="container mt-5">
         <div class="d-flex justify-content-between mb-2">
-            <a href="{{ route('tambahUser') }}" class="btn btn-primary">Tambah</a>
+            <a href="{{ route('tambahUser') }}" class="btn" style="background-color: #073B4C; color: #ffffff">Tambah</a>
         </div>
         <table class="table table-bordered" id="example">
             <thead>
@@ -22,7 +22,6 @@
                     <th>No</th>
                     <th>Name</th>
                     <th>Username</th>
-                    <th>Role</th>
                     <th>Role</th>
                     <th>Aksi</th>
                 </tr>
@@ -33,11 +32,10 @@
                         <td width="50px">{{ $loop->iteration }}</td>
                         <td>{{ $item->name }}</td>
                         <td>{{ $item->username }}</td>
-                        <td>{{ $item->password }}</td>
                         <td>{{ $item->role }}</td>
                         <td width="150px">
-                            <a href="{{ route('editUser', $item->id) }}" class="btn btn-warning">Edit</a>
-                            <a href="{{ route('delete', $item->id) }}" class="btn btn-danger" onclick="return confirm('Yakin')">Hapus</a>
+                            <a href="{{ route('editUser', $item->id) }}" class="btn" style="background-color: #096a87; color: #ffffff">Edit</a>
+                            <a href="{{ route('delete', $item->id) }}" class="btn"  style="background-color: #073B4C; color: #ffffff" onclick="return confirm('Yakin')">Hapus</a>
                         </td>
                     </tr>
                 @endforeach

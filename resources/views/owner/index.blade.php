@@ -28,7 +28,10 @@
                         <label for="To">To</label>
                         <input type="date" name="dateTo" class="form-control w-75" required>
                     </div>
-                    <button class="btn btn-primary">Filter</button>
+                    <div class="d-flex justify-content-between mt-2">
+                        <div></div>
+                    <button class="btn w-75" style="background-color: #073B4C; color: #ffffff">Filter</button>
+                    </div>
                     @if (Session::has('err'))
                         <span class="alert alert-danger">{{ Session::get('err') }}</span>
                     @endif

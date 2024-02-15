@@ -7,6 +7,7 @@ use App\Models\Buku;
 use App\Models\DetailTransaksi;
 use App\Models\Log;
 use App\Models\Transaksi;
+use App\Models\Voucher;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -85,7 +86,9 @@ class KasirController extends Controller
     {
         $transaksi = Transaksi::where(['user_id' => auth()->id(), 'status' => 'pending'])->with('detailtransaksi.buku')->get();
 
-        return view('kasir.keranjang', compact('transaksi'));
+        $isEmpty = $transaksi->isEmpty();
+
+        return view('kasir.keranjang', compact('transaksi', 'isEmpty'));
     }
 
     public function hapusKeranjang($id)
@@ -115,19 +118,33 @@ class KasirController extends Controller
             foreach ($item->detailtransaksi as $dt) {
                 $hargaAwal = $dt->buku->harga * $dt->qty;
                 $totalSemua += $hargaAwal;
+            }
+        }
 
-                $inv = 'INV' . Str::random(7);
-                $item->update([
-                    'invoice' => $inv,
-                    'nama_user' => $request->nama_user,
-                    'status' => 'dibayar',
-                    'totalharga' => $totalSemua,
-                    'uang_bayar' => $request->uang_bayar,
-                    'uang_kembali' => $request->uang_bayar - $totalSemua,
-                    'created_at' => Carbon::now(),
-                ]);
+        $diskon = 0;
+        $kodeVoucher = $request->input('kode_voucher');
+        $voucherId = null;
+        if (!empty($kodeVoucher)) {
+            $voucher = Voucher::where('kode', $kodeVoucher)->where('kedaluwarsa', '>=', now())->first();
+            if ($voucher) {
+                // Menghitung diskon sesuai persentase voucher (10%)
+                $diskon = ($voucher->diskon / 100) * $totalSemua;
+                $totalSemua -= $diskon;
+                $voucherId = $voucher->id;
+            }
+        }
 
+        // Total akhir setelah diskon
+        $totalAkhir = $totalSemua - $diskon;
+
+        foreach ($transaksi as $item) {
+            $totalHargaItem = 0;
+
+            foreach ($item->detailtransaksi as $dt) {
+                $hargaAwal = $dt->buku->harga * $dt->qty;
+                $totalHargaItem += $hargaAwal;
                 $buku = Buku::find($dt->buku->id);
+
                 if ($buku->stok >= $dt->qty) {
                     $buku->stok -= $dt->qty;
                     $buku->save();
@@ -135,6 +152,18 @@ class KasirController extends Controller
                     return redirect()->back()->with('error', 'Insufficient stock for ' . $dt->buku->nama);
                 }
             }
+
+            $inv = 'INV' . Str::random(7);
+            $item->update([
+                'invoice' => $inv,
+                'nama_user' => $request->nama_user,
+                'status' => 'dibayar',
+                'totalharga' => $totalSemua,
+                'uang_bayar' => $request->uang_bayar,
+                'uang_kembali' => $request->uang_bayar - $totalSemua,
+                'voucher_id' => $voucherId,
+                'created_at' => Carbon::now(),
+            ]);
         }
 
         Log::create([
@@ -144,6 +173,8 @@ class KasirController extends Controller
 
         return redirect()->route('home')->with('success', 'Berhasil mengcheckout barang');
     }
+
+
 
     public function history()
     {
@@ -169,5 +200,17 @@ class KasirController extends Controller
         ];
         $pdf = Pdf::loadView('pdf', $data);
         return $pdf->download($transaksi->invoice . '.pdf');
+    }
+
+    function search(Request $request)
+    {
+        $search = $request->input('cari');
+        if ($search) {
+            $buku = Buku::where('nama', 'LIKE', "%{$search}%")->get();
+        } else {
+            $buku = Buku::where('status', 'dijual')->get();
+        }
+
+        return view('home', compact('buku'));
     }
 }

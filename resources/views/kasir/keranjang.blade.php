@@ -9,7 +9,7 @@
     <title>Keranjang</title>
 </head>
 
-<body style="background-color: #F4F1DE;">
+<body style="background-color: #F0F4F8;">
     @include('template.nav')
 
     @php
@@ -38,7 +38,7 @@
                                 <span style="font-weight: 500; margin-right: 10px;">Rp.
                                     {{ number_format($totalSemua, 2, ',', '.') }}</span>
                             </p>
-                            <button class="btn btn-primary" disabled id="btnCheckout">Bayar</button>
+                            <button class="btn" disabled id="btnCheckout" style="background-color: #073B4C; color: #F4F1DE">Bayar</button>
                         </div>
                     </div>
                     <div class="mt-3 d-flex justify-content-between">
@@ -48,6 +48,9 @@
                     </div>
                     <div class="mt-3">
                         <input type="text" class="form-control" placeholder="Nama Pembeli" name="nama_user" required>
+                    </div>
+                    <div class="mt-3">
+                        <input type="text" class="form-control" placeholder="Kode Voucher" name="kode_voucher" required>
                     </div>
                 </form>
             </div>
@@ -75,7 +78,7 @@
                                 <td>{{ $dt->qty }}</td>
                                 <td>Rp. {{ number_format($dt->buku->harga * $dt->qty, 2, ',', '.') }}</td>
                                 <td>
-                                    <a href="{{ route('hapusKeranjang', $dt->id) }}" class="btn btn-danger">Hapus</a>
+                                    <a href="{{ route('hapusKeranjang', $dt->id) }}" class="btn" style="background-color: #073B4C; color: #F4F1DE">Hapus</a>
                                 </td>
                             </tr>
                             @endforeach

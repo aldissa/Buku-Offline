@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function() {
         Route::get('/log', [KasirController::class, 'log'])->name('log');
         Route::get('/filterLog', [KasirController::class, 'filterLog'])->name('filterLog');
     });
+    Route::get('/caribuku', [KasirController::class, 'search'])->name('search');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/delete/{user}', [AdminController::class, 'delete'])->name('delete');
 

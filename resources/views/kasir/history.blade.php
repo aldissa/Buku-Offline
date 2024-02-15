@@ -17,6 +17,7 @@
 
     .card-history:hover{
         text-decoration: underline;
+        color: #000000;
         transform: scale(1.2);
     }
 </style>
@@ -43,7 +44,7 @@
                                     <div class="d-flex justify-content-between">
                                         <p style="font-size: large">{{ $item->nama_user }} <span
                                                 style="font-weight: 500">({{ $item->created_at }})</span></p>
-                                        <p style="padding: 7px; border-radius: 2px;" class="bg-warning">
+                                        <p style="padding: 7px; border-radius: 2px;background-color: #073B4C; color: #ffff">
                                             {{ $item->invoice }}</p>
                                     </div>
                                     <div class="d-flex justify-content-between">

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Buku;
 use App\Models\User;
+use App\Models\Voucher;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -49,6 +50,12 @@ class DatabaseSeeder extends Seeder
             'harga' => '10000',
             'status' => 'tidak dijual',
             'stok' => '15'
+        ]);
+
+        Voucher::create([
+            'kode' => 'DISKON10',
+            'kedaluwarsa' => now()->addDay(1),
+            'diskon' => 50
         ]);
     }
 }

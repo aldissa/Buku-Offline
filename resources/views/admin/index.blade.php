@@ -10,11 +10,11 @@
     <title>Document</title>
 </head>
 
-<body>
+<body style="background-color: ">
     @include('template.nav')
     <div class="container mt-5">
         <div class="d-flex justify-content-between mb-2">
-            <a href="{{ route('tambah') }}" class="btn btn-primary">Tambah</a>
+            <a href="{{ route('tambah') }}" class="btn" style="background-color: #073B4C; color: #ffffff">Tambah</a>
             <form action="{{ route('filteradmin') }}">
                 <select name="statusBuku" class="form-select" onchange="this.form.submit()">
                     <option selected>Status Buku</option>
@@ -37,7 +37,7 @@
             <tbody>
                 @foreach ($buku as $item)
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
+                        <td width="10px">{{ $loop->iteration }}</td>
                         @if ($item->status == 'dijual')
                             <td><img src="{{ asset($item->foto) }}" alt="" width="80px"
                                     style="object-fit: cover"></td>
@@ -48,12 +48,12 @@
                         <td>{{ $item->nama }}</td>
                         <td>{{ $item->deskripsi }}</td>
                         <td>{{ $item->stok }}</td>
-                        <td>
-                            <a href="{{ route('edit', $item->id) }}" class="btn btn-warning">Edit</a>
+                        <td width="150px">
+                            <a href="{{ route('edit', $item->id) }}" class="btn" style="background-color: #096a87; color: #ffffff">Edit</a>
                             @if ($item->status == 'dijual')
-                                <a href="{{ route('nonaktifkanbuku', $item->id) }}" class="btn btn-danger">Hapus</a>
+                                <a href="{{ route('nonaktifkanbuku', $item->id) }}" class="btn" style="background-color: #073B4C; color: #ffffff">Hapus</a>
                             @elseif($item->status == 'tidak dijual')
-                                <a href="{{ route('aktifkanbuku', $item->id) }}" class="btn btn-success">Kembalikan</a>
+                                <a href="{{ route('aktifkanbuku', $item->id) }}" class="btn"  style="background-color: #073B4C; color: #ffffff">Kembali</a>
                             @endif
                         </td>
                     </tr>
