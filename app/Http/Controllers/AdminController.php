@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Buku;
 use App\Models\Log;
 use App\Models\User;
+use App\Models\Voucher;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -160,6 +161,60 @@ class AdminController extends Controller
             'status' => 'tidak dijual'
         ]);
 
+        return redirect()->route('index');
+    }
+
+    function indexDiskon() {
+        $voucher = Voucher::all();
+
+        return view('admin.indexdiskon', compact('voucher'));
+    }
+    
+    function diskon()
+    {
+        return view('admin.diskon');
+    }
+
+    function postdiskon(Request $request)
+    {
+        if ($request) {
+            $buku = Voucher::create([
+                'kode' => $request->kode,
+                'diskon' => $request->diskon,
+                'kedaluwarsa' => $request->kedaluwarsa,
+            ]);
+        }
+
+        if ($buku) {
+            Log::create([
+                'user_id' => auth()->id(),
+                'aktivitas' => auth()->user()->name . ' Menambah Diskon ' . $buku->kode
+            ]);
+        }
+        return redirect()->route('index');
+    }
+    
+    function editDiskon(Voucher $voucher)
+    {
+        return view('admin.editdiskon', compact('voucher'));
+    }
+
+    function postEditDiskon(Request $request, Buku $buku)
+    {
+        if ($request) {
+            $buku->update([
+                'kode' => $request->kode,
+                'diskon' => $request->diskon,
+                'kedaluwarsa' => $request->kedaluwarsa,
+            ]);
+        }
+
+        if ($buku) {
+            Log::create([
+                'user_id' => auth()->id(),
+                'aktivitas' => auth()->user()->name . ' Menambah Diskon ' . $buku->kode
+            ]);
+        }
         return redirect()->route('index');
     }
 }

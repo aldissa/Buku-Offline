@@ -23,6 +23,9 @@
                     <p style="padding: 7px; border-radius: 2px; background-color: #073B4C; color: #ffffff">
                         {{ $transaksi->invoice }}</p>
                 </div>
+                <div class="d-flex justify-content-between mt-2">
+                    <h5 style="font-weight: 100">Total Harga : <span style="font-weight: 500">Rp. {{ number_format($transaksi->totalharga, 2, ',','.') }}</span></h5>
+                </div>
                 <hr>
                 <div class="card-body">
                     <div class="mt-3">
@@ -33,7 +36,7 @@
                                     <th>Nama Barang</th>
                                     <th>Harga Barang</th>
                                     <th>Jumlah Barang</th>
-                                    <th>Total Harga</th>
+                                    <th>Total Harga Barang</th>
                                 </tr>
                             </thead>
                             <tbody>

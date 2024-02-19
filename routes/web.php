@@ -46,7 +46,12 @@ Route::middleware('auth')->group(function() {
         Route::get('/edit-user/{user}', [AdminController::class, 'editUser'])->name('editUser');
         Route::post('/post-edit-user/{user}', [AdminController::class, 'postEditUser'])->name('postEditUser');
         Route::get('/tambah', [AdminController::class, 'tambah'])->name('tambah');
+        Route::get('/index-diskon', [AdminController::class, 'indexdiskon'])->name('indexdiskon');
         Route::post('/posttambah', [AdminController::class, 'posttambah'])->name('posttambah');
+        Route::get('/edit-diskon/{voucher}', [AdminController::class, 'editDiskon'])->name('editDiskon');
+        Route::post('/postEditDiskon/{voucher}', [AdminController::class, 'postEditDiskon'])->name('postEditDiskon');
+        Route::get('/diskon', [AdminController::class, 'diskon'])->name('diskon');
+        Route::post('/postdiskon', [AdminController::class, 'postdiskon'])->name('postdiskon');
         Route::get('/edit/{buku}', [AdminController::class, 'edit'])->name('edit');
         Route::post('/postedit/{buku}', [AdminController::class, 'postedit'])->name('postedit');
         Route::get('/aktifkanbuku/{buku}', [AdminController::class, 'aktifkanbuku'])->name('aktifkanbuku');

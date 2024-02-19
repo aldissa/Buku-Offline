@@ -32,7 +32,7 @@ class OwnerController extends Controller
                     'name' => 'Pendapatan',
                     'data' => $profit
                 ]
-            ]);
+            ])->setColors(['#073B4C']);
         return view('owner.index', compact('chart','totalPendapatan'));
     }
 
@@ -74,7 +74,7 @@ class OwnerController extends Controller
                     'name' => 'Pendapatan',
                     'data' => $profit
                 ]
-            ]);
+            ])->setColors(['#073B4C']);
         return view('owner.index', compact('chart', 'totalPendapatan'));
     }
 }

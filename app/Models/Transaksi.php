@@ -16,4 +16,7 @@ class Transaksi extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+    function voucher() {
+        return $this->belongsTo(Voucher::class);
+    }
 }

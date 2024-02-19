@@ -85,10 +85,10 @@ class KasirController extends Controller
     public function keranjang()
     {
         $transaksi = Transaksi::where(['user_id' => auth()->id(), 'status' => 'pending'])->with('detailtransaksi.buku')->get();
-
+        $voucher = Voucher::where('kedaluwarsa', '>=', now())->get();
         $isEmpty = $transaksi->isEmpty();
 
-        return view('kasir.keranjang', compact('transaksi', 'isEmpty'));
+        return view('kasir.keranjang', compact('transaksi', 'isEmpty', 'voucher'));
     }
 
     public function hapusKeranjang($id)
@@ -133,9 +133,6 @@ class KasirController extends Controller
                 $voucherId = $voucher->id;
             }
         }
-
-        // Total akhir setelah diskon
-        $totalAkhir = $totalSemua - $diskon;
 
         foreach ($transaksi as $item) {
             $totalHargaItem = 0;

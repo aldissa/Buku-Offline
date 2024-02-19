@@ -87,18 +87,14 @@
                 @endforeach
             </tbody>
         </table>
-
-        @php
-            $totalSemua = 0;
-            foreach ($data->detailtransaksi as $dt) {
-                $hargaAwal = $dt->buku->harga * $dt->qty;
-                $totalSemua += $hargaAwal;
-            }
-        @endphp
+        
         <div class="invoice-total">
-            <p><strong>Total: {{ number_format($totalSemua, 2,',','.') }}</strong></p>
-            <p><strong>Bayar: {{ number_format($data->uang_bayar, 2,',','.') }}</strong></p>
-            <p><strong>Kembali: {{ number_format($data->uang_kembali, 2,',','.') }}</strong></p>
+            @if ($data->voucher_id)
+            <p><strong>Diskon: {{ $data->voucher->diskon }}%</strong></p>
+            @endif
+            <p><strong>Total: Rp. {{ number_format($data->totalharga, 2,',','.') }}</strong></p>
+            <p><strong>Bayar: Rp. {{ number_format($data->uang_bayar, 2,',','.') }}</strong></p>
+            <p><strong>Kembali: Rp. {{ number_format($data->uang_kembali, 2,',','.') }}</strong></p>
         </div>
     </div>
 </body>

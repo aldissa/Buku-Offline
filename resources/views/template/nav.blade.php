@@ -1,4 +1,4 @@
-<nav class="navbar" style="background-color: #073B4C;">
+<nav class="navbar fixed-top" style="background-color: #073B4C;">
     @if (auth()->user()->role == 'kasir')
         <a href="{{ route('home') }}" class="navbar-brand" style="color: #F4F1DE;">Welcome, {{ auth()->user()->name }}!</a>
     @endif
@@ -18,6 +18,7 @@
         @if (auth()->user()->role == 'admin')
             <a href="{{ route('log') }}" class="nav-link" style="color: #F4F1DE;">Aktivitas Terakhir</a>
             <a href="{{ route('user') }}" class="nav-link" style="color: #F4F1DE;">Data User</a>
+            <a href="{{ route('indexdiskon') }}" class="nav-link" style="color: #F4F1DE;">Data Voucher</a>
         @endif
         @if (auth()->user()->role == 'owner')
             <a href="{{ route('log') }}" class="nav-link" style="color: #F4F1DE;">Aktivitas Terakhir</a>

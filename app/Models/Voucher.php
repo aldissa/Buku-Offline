@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Voucher extends Model
 {
     use HasFactory;
+    protected $guarded = ['id'];
+
+    function transaksi() {
+        return $this->belongsTo(Transaksi::class);
+    }
 }
